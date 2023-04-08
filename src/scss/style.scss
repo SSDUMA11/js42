@@ -83,9 +83,38 @@ h1,h2,h3,p{margin: 0;}
    }
 .article__description{
     margin-bottom: 5px;
+    &.read{
+        background-color: lighten(#516724, 50%);
+        &::before{
+            content: '';
+            transition: all 0.5s ease 0s;
+            position: absolute;
+            right: 50px;
+            top: 10px;
+            width: 2px;
+            height: 17px;
+            background-color: #516724;
+            transform: rotate(205deg);
+            opacity: 1;
+            visibility: visible;
+        }
+        &::after{
+            content: '';
+            position: absolute;
+            transition: all 0.5s ease 0s;
+            right: 57px;
+            top: 10px;
+            width: 2px;
+            height: 17px;
+            background-color: #516724;
+            transform: rotate(-205deg);
+            opacity: 1;
+            visibility: visible;
+        }
+     }
 }
 
-.article__description{
+.article__text{
     margin-bottom: 5px;
 }
 .article__actions{

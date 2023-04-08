@@ -4,11 +4,12 @@ import ArticleAuthor from "./ArticleAuthor";
 import ArticleBody from "./ArticleBody";
 
 function Article(props) {
+
   const context = useContext(ArticleContext);
     return (
     <>
     {context.children}
-    <ArticleBody show={props.show} text={context.text} />
+    <ArticleBody isRead={props.isRead} isShow={props.isShow} text={context.text} />
     <ArticleAuthor /> 
     </>
     );

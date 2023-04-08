@@ -20,6 +20,7 @@ function App() {
     btn_three: 'Mark as unread',
     current_lang: 'EN'
   }
+
   let UA = {
     title: 'НОВИНИ NVIDIA ',
     news: 'Прискорений штучний інтелект NVIDIA в Azure',
@@ -35,6 +36,7 @@ function App() {
     btn_three: 'Не прочитано',
     current_lang: 'UA'
   }
+
   const article = {
     description: 'Article description:',
     preview: 'NVIDIA on Azure is bringing AI, networking, and high-performance computing to the enterprise.',
@@ -44,9 +46,8 @@ function App() {
   
 
   const storedLang = localStorage.getItem('lang');
-
   const [lang, setLang] = useState(storedLang === 'UA' ? UA : EN);
-
+ 
   useEffect(() => {
     const langBtns = document.querySelectorAll('.lang-btn');
     langBtns[lang.current_lang === 'UA' ? 0 : 1].classList.add('active');
@@ -57,29 +58,29 @@ function App() {
   };
 
 
-  // useEffect(() => {
-  //   if (lang !== storedLang) {
-  //     localStorage.setItem('lang', lang.current_lang);
-  //     const langBtns = document.querySelectorAll('.lang-btn');
-  //     langBtns.forEach(btn => btn.classList.remove('active'));
-  //     langBtns[lang.current_lang === 'UA' ? 0 : 1].classList.add('active');
-  //   }
-  // }, [lang]);
+  useEffect(() => {
+    if (lang !== storedLang) {
+      localStorage.setItem('lang', lang.current_lang);
+      const langBtns = document.querySelectorAll('.lang-btn');
+      langBtns.forEach(btn => btn.classList.remove('active'));
+      langBtns[lang.current_lang === 'UA' ? 0 : 1].classList.add('active');
+    }
+  }, [lang]);
 
   const toggleArticle = () => {
     setIsShow(!isShow)
   }
 
-  // const markAsRead = () => {
-  //   setIsRead(true);
-  // };
+  const markAsRead = () => {
+    setIsRead(true);
+  };
 
-  // const markAsUnread = () => {
-  //   setIsRead(false);
-  // };
+  const markAsUnread = () => {
+    setIsRead(false);
+  };
 
   const [isShow, setIsShow] = useState(false);
-  // const [isRead, setIsRead] = useState(false);
+  const [isRead, setIsRead] = useState(true);
 
  
   return (
@@ -87,14 +88,14 @@ function App() {
       <ArticleContext.Provider value={lang}>
         <h1 className="title">{lang.title}</h1>
         <div className="article">
-          <Article show={isShow} text={article}>
+          <Article isShow={isShow} text={article} isRead={isRead}>
             <div className="article__title">
               <h2>{lang.news}</h2>
             </div>
           </Article>
           <div className="article__actions">
           <button onClick={markAsRead} className="article__btn">{lang.btn_one}</button>
-          <button onClick={toggleArticle} className="article__btn">{isShow ? lang.btn_two_2 : lang.btn_two }</button>
+          <button onClick={toggleArticle}  className="article__btn">{isShow ? lang.btn_two_2 : lang.btn_two }</button>
           <button onClick={markAsUnread} className="article__btn">{lang.btn_three}</button>
         </div>
       </div>
