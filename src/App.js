@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import Article from "./components/Article";
 import ArticleContext from "./components/article-context"
 
@@ -43,29 +43,15 @@ function App() {
     content: 'Microsoft Azure and NVIDIA empower enterprises in the cloud to harness the combined power of NVIDIA accelerated computing and NVIDIA networking on demand to meet the diverse computational requirements of AI, machine learning, data analytics, graphics, virtual desktop, and high-performance computing (HPC) applications. From fractional GPUs and single GPUs to multiple GPUs across multiple nodes for distributed computing, access the right-sized GPU acceleration for your workloads.',
   }
 
-  
 
-  const storedLang = localStorage.getItem('lang');
-  const [lang, setLang] = useState(storedLang === 'UA' ? UA : EN);
- 
-  useEffect(() => {
-    const langBtns = document.querySelectorAll('.lang-btn');
-    langBtns[lang.current_lang === 'UA' ? 0 : 1].classList.add('active');
-  }, [lang]);
+  const [lang, setLang] = useState(
+    localStorage.getItem("lang") === "UA" ? UA : EN
+  );
 
   const changeLang = (newLang) => {
     setLang(newLang);
+    localStorage.setItem("lang", newLang.current_lang);
   };
-
-
-  useEffect(() => {
-    if (lang !== storedLang) {
-      localStorage.setItem('lang', lang.current_lang);
-      const langBtns = document.querySelectorAll('.lang-btn');
-      langBtns.forEach(btn => btn.classList.remove('active'));
-      langBtns[lang.current_lang === 'UA' ? 0 : 1].classList.add('active');
-    }
-  }, [lang]);
 
   const toggleArticle = () => {
     setIsShow(!isShow)
